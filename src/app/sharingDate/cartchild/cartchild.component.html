@@ -1,0 +1,44 @@
+<hr>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <!-- <th>ID</th> -->
+            <th>No</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Image</th>
+            <th>details</th>
+            <th>item count</th>
+            <th>Buy</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- structural binding -->
+        <tr *ngFor="let product of getProductFilter(); let i=index " [ngSwitch]="product.Quantity">
+            <!-- <td>{{product?.ID}}</td> -->
+            <td>{{i+1}}</td>
+            <td
+                [ngClass]="{'text-danger':product.Quantity ==0,'text-warning':product.Quantity ==1, 'text-primary':product.Quantity>=2 }">
+                {{product?.Name |uppercase}}</td>
+            <td>{{product.Price | uSDtoEGP:10| currency:"EGP" :"symbol" }}</td>
+            <td *ngSwitchCase="1">Last Item </td>
+            <td *ngSwitchCase="2">Two Items Only </td>
+            <td *ngSwitchDefault="">
+                <div *ngIf="product.Quantity else finish">
+                    {{product.Quantity}}
+                </div>
+                <ng-template #finish> Out of stock</ng-template>
+            </td>
+            <td><img [appHighlighter]="imgHoverColor" Defaultcolor="red" [src]="product.imgURL" alt=""></td>
+            <td><a name="" id="" class="btn btn-dark" href="#" role="button">Details</a> </td>
+            <td> <input type="number" class="form-cotrol" #boughtCount> </td>
+            <td><a name="" id="" class="btn btn-dark" href="#" role="button"  (click)="calcTotalPrice(product.Price, boughtCount.value, product.Quantity)" >Add To cart</a></td>
+
+
+        </tr>
+    </tbody>
+<!-- <h3> Total price (In nested): {{totalOrderPrice}}</h3> -->
+</table>
+
