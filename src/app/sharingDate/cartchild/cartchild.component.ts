@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Product } from 'src/app/Models/product';
 
 @Component({
@@ -6,15 +6,21 @@ import { Product } from 'src/app/Models/product';
   templateUrl: './cartchild.component.html',
   styleUrls: ['./cartchild.component.scss'],
 })
-export class CartchildComponent implements OnInit {
+export class CartchildComponent implements OnInit, OnChanges {
   todayDate: number = Date.now();
   clientName: string = '';
   imgHoverColor: string = 'pink';
   totalOrderPrice: number = 0; //it's the same property in parent which is totalPriceForBoughtItems
+  totalOrderPricetax: number = 0; //it's the same property in parent which is totalPriceForBoughtItems
   @Input() selectedCategoryChild: number = 0;
   prdList: Product[] = [];
   @Output() totalPriceChanged: EventEmitter<number> =
     new EventEmitter<number>();
+  
+  @Output() totalPriceChangedtax: EventEmitter<number> =
+    new EventEmitter<number>();
+
+  // @ViewChild(app-cartchild) orderDetailsCmp!: app-cartchild;
 
   constructor() {
     this.prdList = [
@@ -149,6 +155,9 @@ export class CartchildComponent implements OnInit {
       },
     ];
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnInit(): void {}
 
@@ -162,19 +171,30 @@ export class CartchildComponent implements OnInit {
 
   calcTotalPrice(itemPrice: any, itemCount: any, prdQuantity: any) {
     if (prdQuantity == 0) {
-      alert("this Product out of stock");
+      alert('this Product out of stock');
       this.totalOrderPrice = 0;
       this.totalPriceChanged.emit(this.totalOrderPrice);
-    }
-    else if (itemCount >prdQuantity ) {
+    } else if (itemCount > prdQuantity) {
       alert(`only ${prdQuantity} available in stock`);
       this.totalOrderPrice = +itemPrice * +itemCount;
       this.totalPriceChanged.emit(this.totalOrderPrice);
     } else {
-       this.totalOrderPrice = +itemPrice * +itemCount;
-       this.totalPriceChanged.emit(this.totalOrderPrice);
-      
+      this.totalOrderPrice = +itemPrice * +itemCount;
+      this.totalPriceChanged.emit(this.totalOrderPrice);
     }
-     
+  }
+  calcTotalPriceTax(itemPrice: any, itemCount: any, prdQuantity: any) {
+    if (prdQuantity == 0) {
+      alert('this Product out of stock');
+      this.totalOrderPricetax = 0;
+      this.totalPriceChangedtax.emit(this.totalOrderPricetax);
+    } else if (itemCount > prdQuantity) {
+      alert(`only ${prdQuantity} available in stock`);
+      this.totalOrderPricetax = +itemPrice * +itemCount + 114;
+      this.totalPriceChangedtax.emit(this.totalOrderPricetax);
+    } else {
+      this.totalOrderPricetax = +itemPrice * +itemCount + 114;
+      this.totalPriceChangedtax.emit(this.totalOrderPricetax);
+    }
   }
 }

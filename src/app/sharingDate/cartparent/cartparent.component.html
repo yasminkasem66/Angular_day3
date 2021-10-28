@@ -17,12 +17,14 @@
 </select>
 
  <h3>Total Order Price: {{totalPriceForBoughtItems}}</h3>
-<hr>
+<!-- <h3> Total price tax: {{totalOrderPricetax}}</h3>
+(totalPriceChangedtax)="onTotalPriceChangedTax($event)" -->
+
 
 
 
     <div class=" ">
-         <app-cartchild [selectedCategoryChild]= " selectedCategory" (totalPriceChanged)="onTotalPriceChanged($event)"> </app-cartchild>
+         <app-cartchild [selectedCategoryChild]= " selectedCategory" (totalPriceChanged)="onTotalPriceChanged($event)"     > </app-cartchild>
     </div>
 
 

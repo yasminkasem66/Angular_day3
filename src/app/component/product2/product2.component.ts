@@ -3,6 +3,7 @@ import { Product } from '../../Models/product';
 import { Category } from '../../Models/category';
 import { DiscountOffers } from 'src/app/Models/discount-offers';
 import { Store } from 'src/app/Models/store';
+import { ShoppingCartItems } from 'src/app/Models/shopping-cart-items';
 
 
 @Component({
@@ -12,6 +13,13 @@ import { Store } from 'src/app/Models/store';
 })
 export class Product2Component implements OnInit {
   //dataSource : MatTableDataSource<any>;
+
+  date: number = Date.now();
+  ID: number = 0;
+  NID: number = 0;
+  prdQuantityy: number = 0;
+  show: boolean = true;
+  cardHoverColor: string = 'pink';
   clientName: string = '';
   IsPurshased: boolean = false;
   store: Store = {
@@ -26,26 +34,20 @@ export class Product2Component implements OnInit {
   color = 'red';
   totalOrderPrice: number = 0;
 
+  addItemToshoppingCartItems: ShoppingCartItems[] | undefined;
+
   Discount: DiscountOffers = DiscountOffers.tenpers;
 
   constructor() {
+    this.ID = 1111222233334444;
+    this.NID = 29506062701825;
+
     this.catList = [
-      {
-        ID: 1,
-        Name: 'Women Cloths',
+      {ID: 1, Name: 'Women Cloths' },
+      { ID: 2, Name: 'Shavers &others',
       },
-      {
-        ID: 2,
-        Name: 'Shavers &others',
-      },
-      {
-        ID: 3,
-        Name: ' soft drinks ',
-      },
-      {
-        ID: 4,
-        Name: 'Men Cloths',
-      },
+      {  ID: 3, Name: ' soft drinks '   },
+      { ID: 4,Name: 'Men Cloths' },
     ];
 
     this.prdList = [
@@ -191,22 +193,15 @@ export class Product2Component implements OnInit {
     else return this.prdList;
   }
 
-  // filteritem(cat:number) {
-  //    alert(cat);
-  //   let x= this.prdList
-  //   if (cat) {
-  //     this.prdList = this.prdList.filter((item) => {
-  //       // alert(item.CategoryID);
-  //       return item.CategoryID == cat;
-  //     });
-  //   }
-  //   return this.prdList;
-  // }
 
   ngOnInit(): void {}
 
   togglePages() {
     this.IsPurshased = !this.IsPurshased;
+  }
+
+  decreaseAmount(product: Product) {
+    product.Quantity--;
   }
 
   calcTotalPrice(itemPrice: any, itemCount: any, prdQuantity: any) {
@@ -221,6 +216,25 @@ export class Product2Component implements OnInit {
     } else {
       this.totalOrderPrice = +itemPrice * +itemCount;
       return this.totalOrderPrice;
+    }
+  }
+
+  showID() {
+    this.show = !this.show;
+  }
+
+  increase(inputVal: any, product: Product) {
+    if (product.Quantity) {
+      product.Quantity--;
+      inputVal.value++;
+    } else {
+      alert('Not Enough Quantity');
+    }
+  }
+  decrease(inputVal: any, product: Product) {
+    if (inputVal.value > 0) {
+      product.Quantity++;
+      inputVal.value--;
     }
   }
 }

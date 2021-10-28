@@ -1,4 +1,6 @@
-<hr>
+
+<!-- <h3> Total price: {{totalOrderPrice}}</h3> -->
+<h3> Total price tax: {{totalOrderPricetax}}</h3> 
 
 <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -34,11 +36,11 @@
             <td><img [appHighlighter]="imgHoverColor" Defaultcolor="red" [src]="product.imgURL" alt=""></td>
             <td><a name="" id="" class="btn btn-dark" href="#" role="button">Details</a> </td>
             <td> <input type="number" class="form-cotrol" #boughtCount> </td>
-            <td><a name="" id="" class="btn btn-dark" href="#" role="button"  (click)="calcTotalPrice(product.Price, boughtCount.value, product.Quantity)" >Add To cart</a></td>
+            <td><a name="" id="" class="btn btn-dark" href="#" role="button"  (click)="calcTotalPrice(product.Price, boughtCount.value, product.Quantity)"  (click)="calcTotalPriceTax(product.Price, boughtCount.value, product.Quantity)" >Add To cart</a></td>
 
 
         </tr>
     </tbody>
-<!-- <h3> Total price (In nested): {{totalOrderPrice}}</h3> -->
+
 </table>
 

@@ -1,0 +1,156 @@
+<!-- <h3> [TEST]: Total Order Price: {{totalOrderPrice}}</h3>
+<h3> [TEST]: Total Order Price: {{totalOrderPricetax}}</h3> -->
+
+    <div class="HomePage-img  mb-5">
+        <div class="row p-2 row-cols-4 justify-content-center">
+            <div *ngFor="let product of  prdListForSelCat ; let i=index " 
+                class="itm HomePage-imgElement  position-relative card  m-4  " [ngSwitch]="product.Quantity"
+                appTranslate appTranslate="pink">
+
+                <span style="font-size: 18;color: #fff; background-color: #000;"
+                    class="product-card-discount badge fw-bold py-2 px-3 w-25 ">-25%</span>
+                <a href=""><img [src]="product.imgURL" alt="..." class="w-100 p-5 mt-3 "></a>
+                <div class="card-body">
+                    <!-- Quantity -->
+                    <span [ngClass]="{'text-dark':true }" class="fs-5"
+                        [ngClass]="{'bg-danger': product.Quantity <=0, 'bg-warning': product.Quantity==1,'bg-primary': product.Quantity>=2 }">Quantity
+                        : </span>
+                    <span *ngSwitchCase="1">Last Item </span>
+                    <span *ngSwitchCase="2">Two Items Only </span>
+                    <span *ngSwitchDefault="">
+                        <span *ngIf="product.Quantity else finish">
+                            {{product.Quantity}}
+                        </span>
+                        <ng-template #finish> Out of stock</ng-template>
+                    </span> <br>
+
+                    <!-- name -->
+                    <span [ngClass]="{'text-dark':true }" class="fs-5">Name : </span>
+                    <div class="name d-inline-block text-truncate" style="max-width: 100px;">
+                        {{product?.Name}}</div>
+                    <!-- price -->
+                    <div><span [ngClass]="{'text-dark':true }" class="fs-5">Price : </span>{{product.Price |
+                        currency:"USD" :'symbol'}}</div>
+                    <!-- <div><button name="" id="" class="btn btn-dark" href="#" role="button" (click)=" viewProduct(product.ID)" > Details</button></div> -->
+                    <!-- iiiiiiiiiiiiiiiiiiiiiii -->
+                    <div><a name="" id="" class="btn btn-dark" [routerLink]="['/Product', product.ID , product.ID]" routerLinkActive="router-link-active"  role="button" > Details2</a></div>
+                    <!-- <td>{{product.Price | uSDtoEGP:10| currency:"EGP" :"symbol" }}</td> -->
+                    <div class="d-flex justify-content-between my-2">
+                        <button class="btn btn-dark" (click)="increase(boughtCount,product)">+</button>
+                        <input type="text" value=0 id="typeNumber" min="0" class="form-control " #boughtCount />
+                        <button class="btn btn-dark" (click)="decrease(boughtCount,product)">-</button>
+                    </div>
+                    <div><button name="" id="" class="btn btn-dark" href="#" role="button"
+                            (click)="calcTotalPrice(product.Price, boughtCount.value, product.Quantity)"
+                            (click)="calcTotalPriceTax(product.Price, boughtCount.value, product.Quantity)">Add To cart</button></div>
+                    </div>
+
+            </div>
+  
+        </div>
+    </div>
+
+
+    <!-- <app-order-detail></app-order-detail> -->
+
+<label for="client" class="text-primary me-3"> Client Name: </label>
+<input type="text" [(ngModel)]="clientName" Id="client">
+<hr> {{clientName}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- button -->
+
+<!-- <button type="button" class="btn btn-dark btn-lg-dark ms-3 p-1 " data-bs-toggle="modal"
+    data-bs-target="#showdetails">
+    More Details
+</button> -->
+
+<!-- Modal 
+<div class="modal fade" id="showdetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="showdetailsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showdetailsLabel">Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="HomePage-img  mb-5">
+                    <div class="row  row-cols-1 justify-content-center">
+                        <div 
+                            class="itm HomePage-imgElement  position-relative card w-100 "
+                            [ngSwitch]="product.Quantity" appTranslate appTranslate="pink">
+                            <a href=""><img src=" {{product.imgURL}}" alt="..." class="w-100   "></a>
+                            <div class="card-body">
+                     <span [ngClass]="{'text-dark':true }" class="fs-5"
+                                    [ngClass]="{'bg-danger': product.Quantity <=0, 'bg-warning': product.Quantity==1,'bg-primary': product.Quantity>=2 }">Quantity
+                                    : </span>
+                                <span *ngSwitchCase="1">Last Item </span>
+                                <span *ngSwitchCase="2">Two Items Only </span>
+                                <span *ngSwitchDefault="">
+                                    <span *ngIf="product.Quantity else finish">
+                                        {{product.Quantity}}
+                                    </span>
+                                    <ng-template #finish> Out of stock</ng-template>
+                                </span> <br>
+
+                          
+                                <span [ngClass]="{'text-dark':true }" class="fs-5">Name : </span>
+                                <div class="name d-inline-block text-truncate" style="max-width: 100px;">
+                                    {{product?.Name}}</div>
+          
+
+                                <div><span [ngClass]="{'text-dark':true }" class="fs-5">Price : </span>{{product.Price
+                                    |
+                                    currency:"USD" :'symbol'}}</div>
+                    
+                                <div class="d-flex justify-content-between my-2">
+                                    <button class="btn btn-dark" (click)="increase(boughtCount,product)">+</button>
+                                    <input type="text" value=0 id="typeNumber" min="0" class="form-control " #boughtCount />
+                                    <button class="btn btn-dark" (click)="decrease(boughtCount,product)">-</button>
+                                </div>
+                                <div><button name="" id="" class="btn btn-dark" href="#" role="button"
+                                        (click)="calcTotalPrice(product.Price, boughtCount.value, product.Quantity)"
+                                        (click)="calcTotalPriceTax(product.Price, boughtCount.value, product.Quantity)">Add To
+                                        cart</button></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+       
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Check Out</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+         <!-- test -->

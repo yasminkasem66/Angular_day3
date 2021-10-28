@@ -1,0 +1,19 @@
+<div class="card mt-4" style="width: 18rem;">
+    <img class="card-img-top" [src]="prd?.imgURL" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">Name {{prd?.Name}}</h5>
+        <p class="card-text"> Price {{prd?.Price}}</p>
+        <p class="card-text"> Quantity {{prd?.Quantity}}</p>
+        <a  class="btn btn-primary" (click)="goBack()">Go Back</a>
+
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+
+            <!-- [display]="sentprdID==1" -->
+            <button type="button" class="btn btn-secondary me-1"  [disabled]="sentPrdID==1" (click)="prevProduct()" >prev</button>
+            <button type="button" class="btn btn-secondary" [disabled]="senti== x-1"  (click)="nextProduct()" >next</button>
+            <!-- [disabled]="senti== undefined" -->
+        </div>
+
+    </div>
+</div>

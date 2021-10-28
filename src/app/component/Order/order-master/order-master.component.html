@@ -1,0 +1,192 @@
+<div class="bg-light">
+<header>
+    <div class="row">
+        <div class="col-12  pt-2">
+            <h1 class="fw-bold fs-5 ps-2">
+                {{info.name}}
+            </h1>
+        </div>
+    </div>
+</header>
+<h3 *ngIf="(Discount== 'No Discount ')?0:1">We offer an explicit discount of: {{Discount}}</h3>
+
+
+<!-- select -->
+<select id="mainGroupSelectEdit" class="form-control dash-form-control select2" style="width: 100%;"
+    data-minimum-results-for-search="Infinity" name="mainGroupSelectEdit" [(ngModel)]=" selectedCategory">
+    <option [ngValue]="null">-/-</option>
+    <option *ngFor="let cat of catList" [value]="cat.ID">{{cat.Name}}</option>
+</select>
+
+
+
+<!-- button -->
+
+<button type="button" class="btn btn-dark btn-lg-dark ms-3 p-1 " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+Cart
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <!--  -->
+
+                <div class="HomePage-img  mb-5">
+                    <div class="row  row-cols-2 justify-content-center">
+
+                        <div  *ngFor="let item of  cartItems; let i=index " ngModelChange
+                            class="itm HomePage-imgElement  position-relative card w-100 " [ngSwitch]="item.productQuantity" 
+                            >
+                            <a href=""><img src=" {{item.productImg}}" alt="..." class="w-100   "></a>
+                            <div class="card-body">
+                                <!-- Quantity -->
+                                <span [ngClass]="{'text-dark':true }" class="fs-5"
+                                    [ngClass]="{'bg-danger': item.productQuantity <=0, 'bg-warning': item.productQuantity==1,'bg-primary': item.productQuantity>=2 }">Quantity
+                                    : </span>
+                                <span *ngSwitchCase="1">Last Item </span>
+                                <span *ngSwitchCase="2">Two Items Only </span>
+                                <span *ngSwitchDefault="">
+                                    <span *ngIf="item.productQuantity else finish">
+                                        {{item.productQuantity}}
+                                    </span>
+                                    <ng-template #finish> Out of stock</ng-template>
+                                </span> <br>
+                
+                                <!-- name -->
+                                <span [ngClass]="{'text-dark':true }" class="fs-5">Name : </span>
+                                <div class="name d-inline-block text-truncate" style="max-width: 100px;">
+                                    {{item.productName}}</div>
+                                <!-- price -->
+                    
+                                <div><span [ngClass]="{'text-dark':true }" class="fs-5">Price : </span>{{item.unitPrice |
+                                    currency:"USD" :'symbol'}}</div>
+                            </div>
+                
+                        </div>
+                
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Check Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <ngbd-modal-basic></ngbd-modal-basic> -->
+
+
+<h3>Total Order Price: {{totalPriceForBoughtItems}}</h3>
+<h3>Total Order Price: {{totalPriceForBoughtItemstax}}</h3>
+
+
+
+
+
+<div class="">
+    <app-order-detail  [sentCatIDFrmMas]= " selectedCategory"  (totalPriceChanged)="
+    onTotalPriceChanged($event)" (totalPriceChangedtax)="onTotalPriceChangedTax($event)" 
+     (addItemToCartItems)="addItemToCartItems($event)"></app-order-detail>
+    
+    <!-- u have an event its name is "totalPriceChanged when this event happen execute my function 
+        onTotalPriceChanged and  have an information put it in $event "
+
+   -->
+    </div>
+
+
+
+
+
+            <!-- ااااااااااااااااااااااا -->
+    
+    <h3>Cart Items <br> {{cartItems}}</h3>
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>productID</th>
+                <th>productName</th>
+                <th>unitPrice</th>
+                <th>selectedQuantity</th>
+                <th>productImg</th>
+                <th>productQuantity</th>
+                <th>totalPrice</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  *ngFor="let item of  cartItems; let i=index "  >
+                <td> {{item.productID}}</td>
+                <td> {{item.productName}}</td>
+                <td> {{item.unitPrice}}</td>
+                <td> {{item.selectedQuantity}}</td>
+                <td>
+                    <img src=" {{item.productImg}}" alt="..." class="w-25   "></td>
+                <td> {{item.productQuantity}}</td>
+                <td> {{totalPrice}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+
+
+
+
+
+    <!-- credit card -->
+    <div class="card mb-4" style="width:40rem;">
+    
+        <div class="card-body">
+            <h5 class="card-title">Custom Pipe credit card</h5>
+            <p class="card-text"> {{date | date:'long'}}</p>
+            <label for="client" class="text-primary me-3 mb-2 fs-5 fw-bold"> Enter your ID: </label>
+    
+            <input type="text" [(ngModel)]="ID" Id="client" class="px-4 py-2 rounded mb-4 me-2" maxlength="16">
+            <button id="" class="btn btn-primary py-2" type="button" (click)="showID()">Enter</button> <br>
+            <div [hidden]="show">
+                <span class="card-text" class="text-primary me-3 mb-2 fs-5 fw-bold"> your ID is : </span><span>{{ID |
+                    creditPipe}}</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- nationalID -->
+    <div class="card mb-4" style="width:40rem;">
+        <div class="card-body">
+            <h5 class="card-title">Custom Pipe NationalID</h5>
+            <p class="card-text"> {{date | date:'long'}}</p>
+            <label for="client" class="text-primary me-3 mb-2 fs-5 fw-bold"> Enter your National ID: </label>
+            <input type="text" [(ngModel)]="NID" Id="client" class="px-4 py-2 rounded mb-4 me-2" maxlength="14">
+    
+            <button id="" class="btn btn-primary py-2 " type="button" (click)="showID()">Enter</button> <br>
+            <div [hidden]="show">
+                <span class="text-primary me-3 mb-2 fs-5 fw-bold"> your Birthdate is : </span> <span>{{NID
+                    |nationalid:"FullDate"}}</span>
+    
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<label for="client" class="text-primary me-3"> Enter you Name</label>
+<input type="text" #custName Id="client">
+<a name="" id="" class="btn btn-primary"  role="button" (click)="checkName()">cick</a>
+<!-- <br>{{custName}} -->

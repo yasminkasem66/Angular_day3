@@ -12,6 +12,7 @@ export class ProductsComponent implements OnInit {
   todayDate: number = Date.now();
   clientName: string = '';
   imgHoverColor: string = 'pink';
+
   prdList: Product[] = [];
   
   catList: Category[] = [];

@@ -1,4 +1,4 @@
-<!-- side bar -->
+<!-- side bar
 <div class="col-">
 
     <div class="container-fluid">
@@ -102,41 +102,43 @@
             <div class="col py-3">
                
 
-                <!-- <app-product2> </app-product2> -->
-                <!-- <app-products> </app-products> -->
 
-           <app-cartparent></app-cartparent>
-
-                <!-- two way binding -->
-                <!-- <div class="form-group mb-3">
+                
+               put the comonent I want here instead of the  -->
+<!-- <app-order-master> </app-order-master> -->
+<!-- <app-product2> </app-product2> -->
+<!-- <app-products> </app-products> -->
+<!-- <app-cartparent></app-cartparent> -->
+<!-- two way binding -->
+<!-- <div class="form-group mb-3">
                     <label for="my-select">ClientName</label>
                     <input type="text" [(ngModel)]=" userFeedback" placeholder="ur feed back">
                 </div>
                 <hr>
-                you entered:{{userFeedback}} -->
-         
+                you entered:{{userFeedback}} 
+
                 
             </div>
         </div>
     </div>
 
-</div>
+</div> -->
 
 
 
-    <!-- content here -->
-    <!-- <h1 [class.highlight]="!isServicesHidden">{{companyName}}</h1> -->
-    <!-- <h1 [style.color]="isServicesHidden?'red':'blue' ">{{companyName}}</h1>
+<!-- content here -->
+<!-- <h1 [class.highlight]="!isServicesHidden">{{companyName}}</h1> -->
+<!-- <h1 [style.color]="isServicesHidden?'red':'blue' ">{{companyName}}</h1>
     <img [src]="logoUrl" alt="" class="w-25"> -->
-    <!-- <img src="{{logoUrl}}" alt=""> -->
-    <!-- <img src="assets/1.jpg" alt=""> -->
-    <!-- <br> -->
-    <!-- <button id="" class="btn btn-primary" type="button" (click)="toggleServices()">Toggle services</button> -->
+<!-- <img src="{{logoUrl}}" alt=""> -->
+<!-- <img src="assets/1.jpg" alt=""> -->
+<!-- <br> -->
+<!-- <button id="" class="btn btn-primary" type="button" (click)="toggleServices()">Toggle services</button> -->
 
 
-    <!-- event binding -->
-    <!-- property binding -->
-    <!-- <div [hidden]="isServicesHidden">
+<!-- event binding -->
+<!-- property binding -->
+<!-- <div [hidden]="isServicesHidden">
         <h1>
             our services
         </h1>
@@ -154,7 +156,60 @@
 <div class="form-group mb-3">
     <label for="my-select">feedbackL</label>
    two way binding -->
-    <!-- <input type="text" [(ngModel)]=" userFeedback" placeholder="ur feed back">
+<!-- <input type="text" [(ngModel)]=" userFeedback" placeholder="ur feed back">
 </div>
 <hr>
-you entered:{{userFeedback}} --> 
+you entered:{{userFeedback}} -->
+
+
+<!-- ///////////////////////////////// -->
+
+<h1>{{info.name}}</h1>
+<!-- interpotion -->
+<!-- <img src="{{info.logo}}" alt=""> -->
+<!-- property pining -->
+<img [src]="info.logo" alt=""> <br>
+
+
+<button id="" class="btn btn-primary" type="button" (click)="toggleServices()">Toggle services</button>
+
+<!-- <div  [hidden]="isServicesHidden"> -->
+<div *ngIf="isServicesHidden">
+    <h1>
+        our services
+    </h1>
+    <ul>
+        <li *ngFor="let ser of info.services">{{ser}} </li>
+    </ul>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<span class="bi fs-1" 
+[class.bi-heart]="!isFavorite"
+ [class.bi-heart-fill]="isFavorite"
+  (click)="onFavoriteClick()">
+
+</span>
+
+
+
+<ul classs="nav nav-pills">
+    <li [class.active]=" defautView=== 'Courses ' " >
+        <a (click)=" setView('Courses')"> Courses</a>
+    </li>
+    <li [class.active]=" defautView=== 'certificates ' ">
+        <a (click)=" setView('certificates')"> certificates</a>
+    </li>
+</ul>
+
+<div [ngSwitch]="defautView">
+    <div *ngSwitchCase="'Courses'"> List of courses</div>
+    <div *ngSwitchCase="'certificates'"> List of certificates</div>
+
+</div>

@@ -10,6 +10,7 @@ export class CartparentComponent implements OnInit {
   catList: Category[] = [];
   selectedCategory: number = 0;
   totalPriceForBoughtItems: number = 0; //calc its value from child components
+  totalOrderPricetax: number = 0;
 
   constructor() {
     this.catList = [
@@ -36,5 +37,9 @@ export class CartparentComponent implements OnInit {
 
   onTotalPriceChanged(OrderTotalPrice: number) {
     this.totalPriceForBoughtItems = OrderTotalPrice;
+  }
+
+  onTotalPriceChangedTax(totalOrderPricetax: number) {
+    this.totalPriceForBoughtItems = totalOrderPricetax +14;
   }
 }
