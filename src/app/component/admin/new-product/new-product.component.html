@@ -1,0 +1,147 @@
+<!-- Edit And delete  -->
+
+<div class="HomePage-img  mb-5">
+    <div class="row p-2 row-cols-4 justify-content-center">
+        <div *ngFor="let product of  prdListForSelCat ; let i=index "
+            class="itm HomePage-imgElement  position-relative card  m-4  " [ngSwitch]="product.Quantity" appTranslate
+            appTranslate="pink">
+
+            <span style="font-size: 18;color: #fff; background-color: #000;"
+                class="product-card-discount badge fw-bold py-2 px-3 w-25 ">-25%</span>
+            <a href=""><img [src]="product.imgURL" alt="..." class="w-100 p-5 mt-3 "></a>
+            <div class="card-body">
+                <!-- Quantity -->
+                <span [ngClass]="{'text-dark':true }" class="fs-5">Quantity: </span>
+
+                <span *ngIf="product.Quantity else finish">
+                    {{product?.Quantity}}
+                </span>
+                <ng-template #finish> Out of stock</ng-template> <br>
+
+
+                <!-- name -->
+                <span [ngClass]="{'text-dark':true }" class="fs-5">Name : </span>
+                <div class="name d-inline-block text-truncate" style="max-width: 100px;">
+                    {{product?.Name}}</div>
+                <!-- price -->
+                <div><span [ngClass]="{'text-dark':true }" class="fs-5">Price : </span>{{product?.Price |
+                    currency:"USD" :'symbol'}}</div>
+                <!-- <div><button name="" id="" class="btn btn-dark" href="#" role="button" (click)=" viewProduct(product.ID)" > Details</button></div> -->
+                <!-- iiiiiiiiiiiiiiiiiiiiiii -->
+                <div><a name="" id="" class="btn btn-dark mb-2" [routerLink]="['/Product', product.id , product.id]"
+                        routerLinkActive="router-link-active" role="button"> Details2</a></div>
+
+                <!-- <button id="" class="btn btn-dark mb-2" type="button" (click)="EditProduct()">Edit Product</button> -->
+                <button id="" class="btn btn-dark mb-2" type="button"  [routerLink]="['/Admin/editproduct', product.id]">Edit Product</button>
+                <button id="" class="btn btn-dark" type="button" (click)="DeleteProduct(product.id)">Delete
+                    Product</button>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<!-- ADD  section start -->
+<section class="contact py-5" id="Contact">
+    <div class="container-lg py-4">
+
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 ">
+                <div class="section-title text-center">
+                    <h2 class="fw-bold mb-5">ADD NEW PRODUCT</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact form">
+                    <!-- <form action=""> -->
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+
+                            <label for=""> Product ID</label>
+                            <input [(ngModel)]=" prd.id" class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your ID Product">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                          <label for=""> Product Name</label>
+                            <input [(ngModel)]=" prd.Name" class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product  Name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                                        <label for=""> Product Price</label>
+
+                            <input [(ngModel)]=" prd.Price" class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product Price">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                                        <label for=""> Product Quentity</label>
+
+                            <input [(ngModel)]=" prd.Quantity" class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product Quantity">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                                        <label for=""> Product Image</label>
+
+                            <input [(ngModel)]=" prd.imgURL" class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product imgURL">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                <label for=""> Product category</label>
+                            <!-- <input [(ngModel)]=" prd.Categoryid" class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product Categoryid"> -->
+                                <select id="mainGroupSelectEdit" class="form-control dash-form-control select2" style="width: 100%;"
+                                    data-minimum-results-for-search="Infinity" name="mainGroupSelectEdit" [(ngModel)]=" prd.Categoryid">
+                                    <option [ngValue]="null">-/-</option>
+                                    <option *ngFor="let cat of catList" [value]="cat.id">{{cat.Name}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <!-- test -->
+
+
+                    <!-- end -->
+
+
+
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                            <button id="" class="btn btn-dark" type="button" (click)="AddProduct()">Add Product</button>
+
+                        </div>
+                    </div>
+
+                    <!-- </form> -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<!--  -->

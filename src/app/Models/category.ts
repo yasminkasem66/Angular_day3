@@ -1,6 +1,6 @@
 export interface Category {
-  ID: number;
+  id: number;
   Name: string;
+  Description: string;
   //   DiscountOffers:Enum["No Discount ", "10% ", "15% "]
-
 }

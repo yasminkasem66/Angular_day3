@@ -7,6 +7,7 @@ import { NotFoundPageComponent } from './component/not-found-page/not-found-page
 import { OrderDetailComponent } from './component/Order/order-detail/order-detail.component';
 import { OrderMasterComponent } from './component/Order/order-master/order-master.component';
 import { ShoppingCartItemsComponent } from './component/Order/shopping-cart-items/shopping-cart-items.component';
+import { PanelComponent } from './component/panel/panel.component';
 import { ProductDetailsComponent } from './component/product-details/product-details.component';
 
 
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' }, //Default path ' ';
   { path: 'Home', component: HomeComponent },
   { path: 'Order', component: OrderDetailComponent },
-  { path: 'Cart', component: ShoppingCartItemsComponent },
+  { path: 'test', component: PanelComponent },
   { path: 'Products', component: OrderMasterComponent },
 
   { path: 'Product/:id/:items', component: ProductDetailsComponent },
@@ -28,7 +29,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./component/User/user.module').then((m) => m.UserModule),
   },
-
+  {
+    path: 'Admin',
+    loadChildren: () =>
+      import('./component/admin/admin.module').then((m) => m.AdminModule),
+  },
 
   { path: '**', component: NotFoundPageComponent }, //wild cart if u check the whole path and u didnt find the route use this one
 ];

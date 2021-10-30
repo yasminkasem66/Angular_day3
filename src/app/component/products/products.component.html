@@ -5,7 +5,7 @@
   <label for="" class="form-label"> select Category</label>
   <select name="cat" id="catID" class="form-select" [(ngModel)]="selectedCategory">
                     <option [value]="0">-/-</option>
-      <option  *ngFor="let cat of catList"  [value]="cat.ID"> {{cat.Name}} </option>
+      <option  *ngFor="let cat of catList"  [value]="cat.id"> {{cat.Name}} </option>
   </select>
 </div>
 

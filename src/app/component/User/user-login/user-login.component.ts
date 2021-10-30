@@ -23,7 +23,7 @@ export class UserLoginComponent implements OnInit {
 
   login() {
     this.userAuthService.login("this.Email", "this.Password");
-    // this.router.navigate(['/User/Profile']);
+    this.router.navigate(['/User/Profile']);
     this.isLogged = true;
   }
 

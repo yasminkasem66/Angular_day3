@@ -7,30 +7,32 @@ import { Product } from '../Models/product';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsFrmAPIService {
+export class ProductslistService {
   constructor(private httpClient: HttpClient) {}
 
+  // get all products
   getAllProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(environment.APIURL + '/products');
+    return this.httpClient.get<Product[]>(environment.APIURL + '/product');
   }
 
-  // getCountProducts() {}
-
+  // get  single product by ID
   getProductByID(prdID: number): Observable<Product> {
     return this.httpClient.get<Product>(
-      environment.APIURL + '/products/' + prdID
+      environment.APIURL + '/product/' + prdID
     );
   }
 
+  //// get   products by categoryID
   getProductByCatID(cID: number): Observable<Product[]> {
     return this.httpClient.get<Product[]>(
       environment.APIURL + '/products?CategoryID=' + cID
     );
   }
 
+  // add product
   addProduct(newprd: Product): Observable<Product | undefined> {
     return this.httpClient.post<Product>(
-      `${environment.APIURL}/products`,
+      `${environment.APIURL}/product`,
       newprd,
       {
         headers: new HttpHeaders({
@@ -41,9 +43,10 @@ export class ProductsFrmAPIService {
     );
   }
 
+  //delete product
   DeleteProduct(id: number): Observable<{}> {
     return this.httpClient.delete<Product>(
-      `${environment.APIURL}/products/${id}`,
+      `${environment.APIURL}/product/${id}`,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -53,9 +56,10 @@ export class ProductsFrmAPIService {
     );
   }
 
+  //Edit product
   EditProduct(id: number, newprd: Product): Observable<Product> {
     return this.httpClient.put<Product>(
-      `${environment.APIURL}/products/${id}`,
+      `${environment.APIURL}/product/${id}`,
       newprd,
       {
         headers: new HttpHeaders({
@@ -65,6 +69,4 @@ export class ProductsFrmAPIService {
       }
     );
   }
-
-  // insertProduct(newprd: Product) {}
 }

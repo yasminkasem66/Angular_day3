@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/Models/category';
 import { DiscountOffers } from 'src/app/Models/discount-offers';
+import { CategoryService } from 'src/app/Services/category.service';
 import { Storeinfo } from 'src/app/shared/Storeinfo';
 import { OrderDetailComponent } from '../order-detail/order-detail.component';
 // import { MatButtonModule } from '@angular/material/button';
@@ -24,8 +25,9 @@ export class OrderMasterComponent implements OnInit, AfterViewInit {
   // @ViewChild('custName') customerName: ElementRef | undefined;
   @ViewChild('custName') customerName!: ElementRef;
   //here we have an object from the element in html  which is the input that has custname as a refernnce and any element come from the html we access it (after viewinit ) cuz only at this condition the ts can see it
-  @ViewChild(OrderDetailComponent) OrderDetailComponentjj!: OrderDetailComponent;
-  //here we access the component that is  founded in the html it's is a component 
+  @ViewChild(OrderDetailComponent)
+  OrderDetailComponentjj!: OrderDetailComponent;
+  //here we access the component that is  founded in the html it's is a component
 
   info: Storeinfo = {
     name: 'Yasmin',
@@ -42,24 +44,29 @@ export class OrderMasterComponent implements OnInit, AfterViewInit {
   totalPriceWithTax: number = 0;
 
   private sentPrdID: number = 0;
-  constructor() {
-    this.catList = [
-      { ID: 1, Name: 'Women Cloths' },
-      { ID: 2, Name: 'Shavers &others' },
-      { ID: 3, Name: ' soft drinks ' },
-      { ID: 4, Name: 'Men Cloths' },
-    ];
+  constructor(private categoriesserviceAPI: CategoryService) {
+    // this.catList = [
+    //   { ID: 1, Name: 'Women Cloths', Description: 'this is describe' },
+    //   { ID: 2, Name: 'Shavers &others', Description: 'this is describe' },
+    //   { ID: 3, Name: ' soft drinks ', Description: 'this is describe' },
+    //   { ID: 4, Name: 'Men Cloths', Description: 'this is describe' },
+    // ];
+
+              this.categoriesserviceAPI.getAllCategories().subscribe(
+        (catListAPI) => {this.catList = catListAPI },
+        (err) => {console.log(err)} )
+      
   }
   ngAfterViewInit(): void {
     this.customerName.nativeElement.style.background = 'gray';
-console.log(`price:${this.OrderDetailComponentjj.totalOrderPrice}`);
-
+    console.log(`price:${this.OrderDetailComponentjj.totalOrderPrice}`);
   }
   checkName() {
     let custome = this.customerName.nativeElement.value;
     console.log(`you enterd ${custome}`);
-    console.log(`price synch from @view child:${this.OrderDetailComponentjj.totalOrderPrice}`);
-  
+    console.log(
+      `price synch from @view child:${this.OrderDetailComponentjj.totalOrderPrice}`
+    );
   }
 
   ngOnInit(): void {

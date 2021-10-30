@@ -9,3 +9,95 @@
     </div>
 
 </div>
+<!--  -->
+
+<button (click)="ADD()" class="btn btn-danger me-3 me-md-5  px-4"> ADD</button>
+<div *ngIf="courses.length else nocourses">
+    <ul>
+        <li *ngFor="let c of courses ; trackBy:trackByCourse">
+            <button #ref (click)="  Remove(c)" class="btn btn-danger me-3 me-md-5  px-4" id="{{c}}" #boughtCount>
+                remove</button> {{c.coursename}}
+        </li>
+    </ul>
+</div>
+<ng-template #nocourses>
+    no courses
+</ng-template>
+
+
+<!-- switch case -->
+<!-- 33333333333333333333333333333333333333333333333 -->
+<section>
+    <div class="row">
+        <div class="col-4">
+
+            <ul class="list-group">
+                <!-- [ngClass]="{'text-danger':product.Quantity ==0,'text-warning':product.Quantity ==1, 'text-primary':product.Quantity>=2
+                }" -->
+                <a (click)=" setView('Courses')">
+                    <li class="list-group-item " [ngClass]="{'active':defautView=='Courses' }"> Courses</li>
+                </a>
+                <a (click)=" setView('certificates')">
+                    <li class="list-group-item " [class.active]=" defautView=='certificates' "> certificates</li>
+                </a>
+            </ul>
+
+        
+        </div>
+        <div class="col-8">
+
+            <div [ngSwitch]="defautView">
+                <div *ngSwitchCase="'Courses'"> List of courses
+                    <div>html</div>
+                    <div>CSS</div>
+                    <div>JAVASCRIPT</div>
+                </div>
+                <div *ngSwitchCase="'certificates'"> List of certificates</div>
+            
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+
+<!-- like and dislike -->
+<!-- 444444444444444444444444444444444 -->
+<!-- [class.bi-heart]="!isFavorite"
+[class.bi-heart-fill]="isFavorite" -->
+<span class="bi fs-1 text-danger" 
+[ngClass]="{
+   'bi-heart':!isFavorite,
+   'bi-heart-fill':isFavorite
+}"
+ (click)="onFavoriteClick()">
+</span>
+<br>
+
+<!-- 55555555555555 -->
+
+<!-- [style.background]=" white?'darkblue':'black' "
+[style.color]=" white?'black':'white' " -->
+<button name="" id="" class="px-5  py-3  rounded border-0"
+ (click)= "switchColor()"
+[ngStyle] ="{
+    'background': white?'pink':'black' ,
+    'color': white?'black':'white'
+
+}"
+> Click</button>
+
+
+<!-- 6666666666666666666 -->
+
+<input type="text" InputFormat format='a'>
+
+<!-- validation has two types
+template driven [simple form, simple validation, Easy]
+reactive [validation inside the code]
+ -->
+
+
+

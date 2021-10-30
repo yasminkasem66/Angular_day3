@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   // companyName: string = 'ITI';
   // logoUrl: string = 'assets/1.jpg';
   // service: string[] = ['x', 'y'];
-  defautView = 'certificates';
+ 
 
   isServicesHidden: boolean = false;
   userFeedback: string = ' ';
@@ -82,9 +82,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isFavorite = !this.isFavorite;
   }
 
-  setView(sntdefautView:string) {
-    this.defautView = sntdefautView;
-  }
+
 
   //////
 }

@@ -25,12 +25,12 @@ import { ShoppingCartItemsComponent } from './component/Order/shopping-cart-item
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalBasic } from './component/Order/order-master/modal-basic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PanelComponent } from './component/panel/panel.component';
 import { HttpClientModule } from '@angular/common/http';
+import { InputFormatDirective } from './Directives/input-format.directive';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
     ShoppingCartItemsComponent,
     NgbdModalBasic,
     PanelComponent,
+    InputFormatDirective,
   ],
   imports: [
     BrowserModule,

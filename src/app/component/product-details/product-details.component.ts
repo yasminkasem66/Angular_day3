@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   public sentPrdID: number = 0;
   public senti: number = 0;
   public x: number = 0;
-  prd: Product | undefined;
+  prd: Product |undefined;
   // public subscribtions : Subscription[] | null=null;
   public subscribtions: Subscription[] = [];
 
@@ -24,8 +24,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private productservice: ProductService,
     private productserviceAPI: ProductsFrmAPIService,
     private location: Location,
-    private router: Router
-  ) {}
+    private router: Router,
+
+  ) {
+  }
 
   ngOnInit(): void {
     this.x = this.productservice.getCountProducts();
@@ -34,8 +36,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         //to get parames from id
         this.sentPrdID = Number(paramMap.get('id'));
         this.senti = Number(paramMap.get('items'));
-        this.prd = this.productservice.getProductByID(this.sentPrdID);
+        // this.prd = this.productservice.getProductByID(this.sentPrdID);
+       this.productserviceAPI.getProductByID(this.sentPrdID).subscribe( (prd) => {this.prd = prd; },(err) => { console.log(err);});
       },
+
       (err) => {
         console.log(err);
       }

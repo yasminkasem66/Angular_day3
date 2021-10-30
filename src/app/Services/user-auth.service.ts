@@ -28,24 +28,30 @@ export class UserAuthService {
       fakeToken = ' fakeToken';
       localStorage.setItem('fakeToken', fakeToken);
       this.islogged = true;
+            this.loggedStatus.next(true);
+
     }
   }
 
   //when log out false
   logOut() {
     localStorage.removeItem('fakeToken');
-    this.islogged = false;
+    this.islogged = false; //we can stop using this one 
+                this.loggedStatus.next(false);
+
   }
 
   isLogged(): boolean {
     return this.islogged;
+   
+
   }
 
   // isLoggedSubject():observable<any> {
   //   return this.loggedStatus;
   // }
 
-  // getNotifications(): Observable<string> {
-  //   return this.notificationObserable;
-  // }
+  isLoggedSubject(): Observable<boolean> {
+    return this.loggedStatus;
+  }
 }

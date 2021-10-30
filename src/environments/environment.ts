@@ -6,7 +6,7 @@ export const environment = {
   //carry any static data like the link of api
   //when we make build he uses environment.production
   production: false,
-  APIURL: 'http://localhost:8080',
+  APIURL: 'http://localhost:3000',
 };
 
 /*

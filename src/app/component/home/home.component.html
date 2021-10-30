@@ -199,17 +199,3 @@ you entered:{{userFeedback}} -->
 
 
 
-<ul classs="nav nav-pills">
-    <li [class.active]=" defautView=== 'Courses ' " >
-        <a (click)=" setView('Courses')"> Courses</a>
-    </li>
-    <li [class.active]=" defautView=== 'certificates ' ">
-        <a (click)=" setView('certificates')"> certificates</a>
-    </li>
-</ul>
-
-<div [ngSwitch]="defautView">
-    <div *ngSwitchCase="'Courses'"> List of courses</div>
-    <div *ngSwitchCase="'certificates'"> List of certificates</div>
-
-</div>

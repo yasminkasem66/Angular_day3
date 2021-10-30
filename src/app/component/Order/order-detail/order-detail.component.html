@@ -1,6 +1,7 @@
 <!-- <h3> [TEST]: Total Order Price: {{totalOrderPrice}}</h3>
 <h3> [TEST]: Total Order Price: {{totalOrderPricetax}}</h3> -->
 
+
     <div class="HomePage-img  mb-5">
         <div class="row p-2 row-cols-4 justify-content-center">
             <div *ngFor="let product of  prdListForSelCat ; let i=index " 
@@ -19,7 +20,7 @@
                     <span *ngSwitchCase="2">Two Items Only </span>
                     <span *ngSwitchDefault="">
                         <span *ngIf="product.Quantity else finish">
-                            {{product.Quantity}}
+                            {{product?.Quantity}}
                         </span>
                         <ng-template #finish> Out of stock</ng-template>
                     </span> <br>
@@ -29,11 +30,11 @@
                     <div class="name d-inline-block text-truncate" style="max-width: 100px;">
                         {{product?.Name}}</div>
                     <!-- price -->
-                    <div><span [ngClass]="{'text-dark':true }" class="fs-5">Price : </span>{{product.Price |
+                    <div><span [ngClass]="{'text-dark':true }" class="fs-5">Price : </span>{{product?.Price |
                         currency:"USD" :'symbol'}}</div>
                     <!-- <div><button name="" id="" class="btn btn-dark" href="#" role="button" (click)=" viewProduct(product.ID)" > Details</button></div> -->
                     <!-- iiiiiiiiiiiiiiiiiiiiiii -->
-                    <div><a name="" id="" class="btn btn-dark" [routerLink]="['/Product', product.ID , product.ID]" routerLinkActive="router-link-active"  role="button" > Details2</a></div>
+                    <div><a name="" id="" class="btn btn-dark" [routerLink]="['/Product', product.id , product.id]" routerLinkActive="router-link-active"  role="button" > Details2</a></div>
                     <!-- <td>{{product.Price | uSDtoEGP:10| currency:"EGP" :"symbol" }}</td> -->
                     <div class="d-flex justify-content-between my-2">
                         <button class="btn btn-dark" (click)="increase(boughtCount,product)">+</button>

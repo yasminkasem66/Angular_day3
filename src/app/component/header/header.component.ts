@@ -21,6 +21,17 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+  
+    // this.isLogged = this.userAuthService.isLogged();
+    // it will execute one time
+
+
+    //everytime the status change the subscribe feels and notify the isLogged property
+    //subject behavior  emmit every time the subject change its status
+    //anyone wants to know if there is login or log out he knows from the subject
+    this.userAuthService.isLoggedSubject().subscribe(
+      (loggedStatus) => this.isLogged = loggedStatus
+    )
+
   }
 }

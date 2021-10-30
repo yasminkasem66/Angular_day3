@@ -13,7 +13,7 @@
 <select id="mainGroupSelectEdit" class="form-control dash-form-control select2" style="width: 100%;"
     data-minimum-results-for-search="Infinity" name="mainGroupSelectEdit" [(ngModel)]=" selectedCategory">
     <option [ngValue]="null">-/-</option>
-    <option *ngFor="let cat of catList" [value]="cat.ID">{{cat.Name}}</option>
+    <option *ngFor="let cat of catList" [value]="cat.id">{{cat.Name}}</option>
 </select>
 
  <h3>Total Order Price: {{totalPriceForBoughtItems}}</h3>

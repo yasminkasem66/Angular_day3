@@ -1,0 +1,77 @@
+<!-- ADD  section start -->
+<section class="contact py-5" id="Contact">
+    <div class="container-lg py-4">
+
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 ">
+                <div class="section-title text-center">
+                    <h2 class="fw-bold mb-5">Edit PRODUCT</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact form">
+                    <!-- <form action=""> -->
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                 <label for=""> Product ID</label>
+                            <input [(ngModel)]="prd.id"  class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your ID Product">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                <label for=""> Product Name</label>
+                            <input [(ngModel)]="prd.Name"   class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product  Name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                <label for=""> Product Price</label>
+                            <input   [(ngModel)]="prd.Price" class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product Price">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                <label for=""> Product Quentity</label>
+                            <input  [(ngModel)]="prd.Quantity"  class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product Quantity">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                <label for=""> Product Image</label>
+                            <input [(ngModel)]="prd.imgURL"  class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product imgURL">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                                <label for=""> Product category</label>
+                            <input   [(ngModel)]="prd.Categoryid"  class="form-control form-control-lg fs-6 " type="text"
+                                placeholder="Enter Your  Product Categoryid">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12  mb-4">
+                            <button id="" class="btn btn-dark" type="button" (click)="  EditProduct(id,prd)">Edit Product</button>
+
+                        </div>
+                    </div>
+
+                    <!-- </form> -->
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+

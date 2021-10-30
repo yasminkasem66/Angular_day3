@@ -49,29 +49,40 @@ export class OrderDetailComponent implements OnInit, OnChanges {
     public router: Router
   ) {
     //if this element not a service it'll show an errorr if
+
+
+      this.prdListForSelCat = this.prdservice.getAllProducts();
+      //here we get the elements from the api
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     // this.numberProducts = this.prdservice.getAllProducts();
     if (this.sentCatIDFrmMas != 0)
-      this.prdListForSelCat = this.prdservice.getProductByCategoryID(
-        this.sentCatIDFrmMas
-      );
+    {
+            // this.prdListForSelCat = this.prdservice.getProductByCategoryID(
+      //   this.sentCatIDFrmMas
+      // );
+      this.productserviceAPI.getProductByCatID(this.sentCatIDFrmMas).subscribe(
+        (productList) => {this.prdListForSelCat = productList; },
+        (err) => {console.log(err)} )
+      }
+
+
     else {
-     this.prdListForSelCat = this.prdservice.getAllProducts(); 
-    //here we get the elements from the api 
+      // this.prdListForSelCat = this.prdservice.getAllProducts();
+      //here we get the elements from the api
+
+            this.productserviceAPI.getAllProducts().subscribe(
+              (productList) => {
+                this.prdListForSelCat = productList;
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
     }
-    
-
   }
-
-  //   getProductFilter() {
-  //     if (this.sentCatIDFrmMas !== 0)
-  //       return this.prdList.filter(
-  //         (item) => item.CategoryID == this.sentCatIDFrmMas
-  //       );
-  //     else return this.prdList;
-  //   }
 
   ngOnInit(): void {}
 
@@ -113,7 +124,7 @@ export class OrderDetailComponent implements OnInit, OnChanges {
 
     this.addItemToCartItems.emit({
       //the event that wecreated above its fired here
-      productID: product.ID,
+      productID: product.id,
       productName: product.Name,
       unitPrice: product.Price,
       selectedQuantity: userQuentityInput.value,
@@ -129,7 +140,7 @@ export class OrderDetailComponent implements OnInit, OnChanges {
     }
 
     this.addItemToCartItems.emit({
-      productID: product.ID,
+      productID: product.id,
       productName: product.Name,
       unitPrice: product.Price,
       selectedQuantity: userQuentityInput.value,
